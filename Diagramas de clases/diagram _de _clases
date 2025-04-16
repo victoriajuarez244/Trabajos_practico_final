@@ -1,0 +1,72 @@
+@startuml
+class Usuario {
+  + Id: int
+  + Nombre: string
+  + Contraseña: string
+  + Fecha: date
+  + Total_de_ventas: float
+  + Rol: string
+}
+
+class Producto {
+  + Id: int
+  + Nombre: string
+  + Descripcion: string
+  + Precio: float
+  + AgregarProducto()
+  + ConsultarStock()
+  + GenerarInforme()
+  + NotificarStockCritico()
+}
+
+class MateriaPrima {
+  + Id: int
+  + Nombre: string
+  + Descripcion: string
+  + Precio: float
+  + AgregarMateriaPrima()
+}
+
+class Proveedor {
+  + Id: int
+  + Nombre: string
+  + Direccion: string
+  + Telefono: int
+  + Email: string
+}
+
+class Cliente {
+  + Id: int
+  + Nombre: string
+  + Direccion: string
+  + Telefono: int
+  + Email: string
+}
+
+class Categoria {
+  + Id: int
+  + Nombre: string
+  + Descripcion: string
+}
+
+class Venta {
+  + Id: int
+  + Fecha: date
+  + Total_de_ventas: float
+}
+
+class Compra {
+  + Id: int
+  + Fecha: date
+}
+
+Usuario --> Inventario
+Inventario "1" *-- "1..*" Producto
+Inventario "1" *-- "1..*" MateriaPrima
+Producto "1..*" --> "1" Categoria
+MateriaPrima "1..*" --> "1" Proveedor
+Venta --> Producto
+Venta --> Cliente
+Compra --> MateriaPrima
+Compra --> Proveedor
+@enduml
