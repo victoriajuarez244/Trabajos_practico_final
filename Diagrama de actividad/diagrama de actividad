@@ -1,0 +1,33 @@
+@startuml
+start
+:Acceder al sistema;
+:Ver inventario;
+fork
+  :Gestionar inventario;
+  fork
+    :Agregar producto/Materia Prima;
+  fork again
+    :Modificar Producto/Materia Prima;
+  fork again
+    :Eliminar Producto/Materia Prima;
+  end fork
+fork again
+  :Consultar stock;
+end fork
+
+if (Se necesita un informe?) then (Sí)
+  :Generar informe;
+else (No)
+endif
+
+if (Se necesita alertas?) then (Sí)
+  :Gestionar Alerta;
+else (No)
+endif
+
+:Volver al menú principal;
+:Cerrar sesión;
+stop
+@enduml
+
+
