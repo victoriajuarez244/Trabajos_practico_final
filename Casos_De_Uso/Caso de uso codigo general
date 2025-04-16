@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+actor Usuario as user
+
+rectangle "Sistema" {
+  usecase (Acceder al Sistema) as UC1
+  usecase (Generar informes) as UC2
+  usecase (Gestionar Alertas) as UC3
+  
+  UC2 <.. (Gestionar inventario) : extend
+  UC2 <.. (Gestionar clientes) : extend
+  UC2 <.. (Gestionar productos) : extend
+  UC2 <.. (Gestionar proveedores) : extend
+  UC2 <.. (Gestionar materia primas) : extend
+  
+  UC3 <.. (Gestionar pedidos de materias primas) : extend
+  UC3 <.. (Gestionar pedidos de productos) : extend
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+@enduml

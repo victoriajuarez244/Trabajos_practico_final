@@ -1,0 +1,17 @@
+
+@startuml
+left to right direction
+actor Usuario as user
+rectangle "Gestión de inventario" {
+  usecase (Consultar stock) as UC1
+  usecase (Generar informe Producto) as UC2
+  usecase (Generar Informe MP) as UC3
+  usecase (Ajustar stock) as UC4
+  
+  UC1 <.. (Consultar stock crítico) : extend
+  UC2 <.. (Generar Informe MP) : extend
+}
+user --> UC1
+user --> UC2
+user --> UC4
+@enduml
