@@ -1,0 +1,23 @@
+@startuml
+participant Interfaz
+participant "Gestor de inventario" as Gestor
+participant Producto
+
+Interfaz -> Gestor: Consultar stock producto
+Gestor -> Producto: Enviar mensaje de consulta
+activate Producto
+Producto -> Producto: Consultar stock actual
+Producto --> Gestor: Devolver datos consulta
+deactivate Producto
+Gestor --> Interfaz: Enviar datos consulta
+Interfaz -> Interfaz: Mostrar información usuario
+
+Interfaz -> Gestor: Generar informe producto
+Gestor -> Producto: Enviar pedido informe
+activate Producto
+Producto -> Producto: Generar informe
+Producto --> Gestor: Devolver informe
+deactivate Producto
+Gestor --> Interfaz: Devolver informe usuario
+Interfaz -> Interfaz: Mostrar informe producto
+@enduml
