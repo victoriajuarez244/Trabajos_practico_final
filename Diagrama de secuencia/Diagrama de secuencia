@@ -1,23 +1,58 @@
 @startuml
+skinparam sequence {
+  ActivationBackgroundColor White
+  ActivationBorderColor Black
+}
+
 participant Interfaz
 participant "Gestor de inventario" as Gestor
 participant Producto
 
+== Consulta de Stock ==
+
+autonumber
 Interfaz -> Gestor: Consultar stock producto
+activate Gestor #White
+
 Gestor -> Producto: Enviar mensaje de consulta
-activate Producto
+activate Producto #White
+
 Producto -> Producto: Consultar stock actual
+activate Producto #White
+Producto --> Producto: stock
+deactivate Producto
+
 Producto --> Gestor: Devolver datos consulta
 deactivate Producto
-Gestor --> Interfaz: Enviar datos consulta
-Interfaz -> Interfaz: Mostrar información usuario
 
+Gestor --> Interfaz: Enviar datos consulta
+deactivate Gestor
+
+Interfaz -> Interfaz: Mostrar información usuario
+activate Interfaz #White
+deactivate Interfaz
+
+== Generación de Informe ==
+
+autonumber
 Interfaz -> Gestor: Generar informe producto
+activate Gestor #White
+
 Gestor -> Producto: Enviar pedido informe
-activate Producto
+activate Producto #White
+
 Producto -> Producto: Generar informe
+activate Producto #White
+Producto --> Producto: informe
+deactivate Producto
+
 Producto --> Gestor: Devolver informe
 deactivate Producto
+
 Gestor --> Interfaz: Devolver informe usuario
+deactivate Gestor
+
 Interfaz -> Interfaz: Mostrar informe producto
+activate Interfaz #White
+deactivate Interfaz
 @enduml
