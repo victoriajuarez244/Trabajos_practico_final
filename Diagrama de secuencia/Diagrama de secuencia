@@ -4,6 +4,7 @@ skinparam sequence {
   ActivationBorderColor Black
 }
 
+actor Usuario
 participant Interfaz
 participant "Gestor de inventario" as Gestor
 participant Producto
@@ -11,6 +12,7 @@ participant Producto
 == Consulta de Stock ==
 
 autonumber
+Usuario -> Interfaz: Solicitar consulta stock
 Interfaz -> Gestor: Consultar stock producto
 activate Gestor #White
 
@@ -32,9 +34,12 @@ Interfaz -> Interfaz: Mostrar información usuario
 activate Interfaz #White
 deactivate Interfaz
 
+Interfaz --> Usuario: Mostrar resultado
+
 == Generación de Informe ==
 
 autonumber
+Usuario -> Interfaz: Solicitar informe
 Interfaz -> Gestor: Generar informe producto
 activate Gestor #White
 
@@ -55,4 +60,13 @@ deactivate Gestor
 Interfaz -> Interfaz: Mostrar informe producto
 activate Interfaz #White
 deactivate Interfaz
+
+Interfaz --> Usuario: Mostrar informe
+
+== Fin del Programa ==
+Usuario -> Interfaz: Cerrar programa
+Interfaz -> Interfaz: Finalizar ejecución
+activate Interfaz #White
+deactivate Interfaz
+
 @enduml
