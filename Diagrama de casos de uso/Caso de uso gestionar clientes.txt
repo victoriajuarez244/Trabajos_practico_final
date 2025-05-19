@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+actor Usuario
+rectangle Sistema {
+  (Gestionar Clientes) --> (Consultar Historial de Clientes) : include
+  (Gestionar Clientes) --> (Generar Informes de Clientes) : include
+  Usuario --> (Gestionar Clientes)
+}
+@enduml
