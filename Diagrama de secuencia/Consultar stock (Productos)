@@ -1,0 +1,25 @@
+@startuml
+actor Usuario
+boundary Interfaz
+control GestorInventario
+entity Producto
+
+== Consultar stock (Productos) ==
+Usuario -> Interfaz : seleccionar("Gestionar inventario > Productos")
+Usuario -> Interfaz : clickBuscar(filtros)
+Interfaz -> GestorInventario : consultarStockProductos(filtros)
+GestorInventario -> Producto : obtenerStock(filtros)
+Producto --> GestorInventario : listaProductos: List<ProductoDTO>
+
+alt lista vacía
+  GestorInventario --> Interfaz : resultados([])
+  Interfaz -> Usuario : mostrarMensaje("No se encontraron resultados")
+else con resultados
+  loop por cada producto
+    GestorInventario -> Producto : esCritico(id)
+    Producto --> GestorInventario : bool esCritico
+  end
+  GestorInventario --> Interfaz : resultados(listaProductosConCritico)
+  Interfaz -> Usuario : mostrarResultados(lista, destacarCriticos=true)
+end
+@enduml
