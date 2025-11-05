@@ -25,6 +25,7 @@ class MateriaPrima {
   + Descripcion: string
   + Precio: float
   + AgregarMateriaPrima()
+  - b
 }
 
 class Proveedor {
