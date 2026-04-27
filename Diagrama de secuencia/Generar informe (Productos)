@@ -1,0 +1,24 @@
+@startuml
+actor Usuario
+boundary Interfaz
+control GestorInventario
+control ServicioReportes
+entity Producto
+boundary GeneradorPDF
+
+== Generar informe (Productos) ==
+Usuario -> Interfaz : clickGenerarInforme(filtros)
+Interfaz -> GestorInventario : prepararDatosInformeProductos(filtros)
+GestorInventario -> Producto : obtenerDatosInforme(filtros)
+Producto --> GestorInventario : datos: List<ItemProductoDTO>
+GestorInventario -> ServicioReportes : crearInformeProductos(datos)
+ServicioReportes -> GeneradorPDF : render(templateProductos, datos)
+GeneradorPDF --> ServicioReportes : archivoPDF
+ServicioReportes --> Interfaz : informePDF
+Interfaz -> Usuario : descargar("informe_productos_YYYY-MM-DD.pdf")
+
+alt error al generar
+  ServicioReportes --> Interfaz : error("No se pudo generar el informe")
+  Interfaz -> Usuario : mostrarError("Intente nuevamente")
+end
+@enduml
